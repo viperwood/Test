@@ -1,0 +1,81 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectCapability Include="Avalonia" />
+        <TrimmerRootAssembly Include="Avalonia.Themes.Fluent" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="0.10.19" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.19" />
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.19" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.5" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+        <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Images\school_logo (1).png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Images\logo.png" />
+      <AvaloniaResource Include="Images\logo.png" />
+      <None Remove="ServiceSchools\for company.jpg" />
+      <AvaloniaResource Include="ServiceSchools\for company.jpg" />
+      <None Remove="ServiceSchools\online lessons.jpg" />
+      <AvaloniaResource Include="ServiceSchools\online lessons.jpg" />
+      <None Remove="ServiceSchools\Английский язык.jpg" />
+      <AvaloniaResource Include="ServiceSchools\Английский язык.jpg" />
+      <None Remove="ServiceSchools\Испанский язык.jpg" />
+      <AvaloniaResource Include="ServiceSchools\Испанский язык.jpg" />
+      <None Remove="ServiceSchools\Итальянский язык.jpg" />
+      <AvaloniaResource Include="ServiceSchools\Итальянский язык.jpg" />
+      <None Remove="ServiceSchools\киноклуб.jpg" />
+      <AvaloniaResource Include="ServiceSchools\киноклуб.jpg" />
+      <None Remove="ServiceSchools\Китайский язык.jpg" />
+      <AvaloniaResource Include="ServiceSchools\Китайский язык.jpg" />
+      <None Remove="ServiceSchools\Немецкий язык.png" />
+      <AvaloniaResource Include="ServiceSchools\Немецкий язык.png" />
+      <None Remove="ServiceSchools\Подготовка к экзамену ACT.png" />
+      <AvaloniaResource Include="ServiceSchools\Подготовка к экзамену ACT.png" />
+      <None Remove="ServiceSchools\Подготовка к экзамену GMAT.png" />
+      <AvaloniaResource Include="ServiceSchools\Подготовка к экзамену GMAT.png" />
+      <None Remove="ServiceSchools\Подготовка к экзамену GRE.jpeg" />
+      <AvaloniaResource Include="ServiceSchools\Подготовка к экзамену GRE.jpeg" />
+      <None Remove="ServiceSchools\Подготовка к экзамену IELTS.jpg" />
+      <AvaloniaResource Include="ServiceSchools\Подготовка к экзамену IELTS.jpg" />
+      <None Remove="ServiceSchools\Подготовка к экзамену SAT.png" />
+      <AvaloniaResource Include="ServiceSchools\Подготовка к экзамену SAT.png" />
+      <None Remove="ServiceSchools\Подготовка к экзамену TOEFL.jpg" />
+      <AvaloniaResource Include="ServiceSchools\Подготовка к экзамену TOEFL.jpg" />
+      <None Remove="ServiceSchools\Португальский язык.jpg" />
+      <AvaloniaResource Include="ServiceSchools\Португальский язык.jpg" />
+      <None Remove="ServiceSchools\Французский язык.jpg" />
+      <AvaloniaResource Include="ServiceSchools\Французский язык.jpg" />
+      <None Remove="ServiceSchools\Японский язык.jpg" />
+      <AvaloniaResource Include="ServiceSchools\Японский язык.jpg" />
+    </ItemGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="Xcopy /I /E /Y $(ProjectDir)ServiceSchools $(TargetDir)ServiceSchools&#xA;" />
+    </Target>
+</Project>

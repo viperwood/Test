@@ -1,0 +1,101 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Attempt4.MainWindow"
+        MinHeight="400"
+        MinWidth="600"
+        Icon="Images/logo.png"
+        Title="Attempt4">
+    <Grid
+        Margin="20"
+        RowDefinitions="Auto,*,Auto"
+        ColumnDefinitions="*,*,*">
+        <TextBox
+                Grid.Column="0"
+                Name="SearchTextBox"
+                Watermark="поиск услуг"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"/>
+        <ComboBox
+            Grid.Column="1"
+            SelectedIndex="0"
+            Name="SortComboBox"
+            HorizontalAlignment="Stretch">
+            <ComboBoxItem Content="по возрастанию"/>
+            <ComboBoxItem Content="по убыванию"/>
+        </ComboBox>
+        <ComboBox
+            Grid.Column="2"
+            SelectedIndex="0"
+            Name="FilterComboBox"
+            HorizontalAlignment="Stretch">
+            <ComboBoxItem Content="Все"/>
+            <ComboBoxItem Content="от 0 до 5%"/>
+            <ComboBoxItem Content="от 5% до 15%"/>
+            <ComboBoxItem Content="от 15% до 30%"/>
+            <ComboBoxItem Content="от 30% до 70%"/>
+            <ComboBoxItem Content="от 70% до 100%"/>
+        </ComboBox>
+            
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Margin="0,0,10,0"
+            Name="ItemsCounter"
+            DockPanel.Dock="Bottom"/>
+        <Border Grid.Row="1" Grid.ColumnSpan="3">
+            <ListBox 
+                Margin="10"
+                DockPanel.Dock="Top"
+                Name="ServiceListBox"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border 
+                            BorderThickness="2"
+                            BorderBrush="Black"
+                            Background="{Binding Color}">
+                            <DockPanel>
+                                <Image
+                                    Width="64"
+                                    Height="64"
+                                    Margin="10"
+                                    DockPanel.Dock="Left"
+                                    Source="{Binding PathToMainImage}"/>
+                                <StackPanel>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding Title}"/>
+                                    <TextBlock Text="{Binding OldPriceString}"/>
+                                    <TextBlock Text="{Binding CurrentPriceString}"/>
+                                    <TextBlock Text="{Binding DiscountString}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button
+                                            Tag="{Binding Id}"
+                                            IsVisible="{Binding IsAdmin}"
+                                            Content="редактировать"
+                                            Click="RedactServices_Click"/>
+                                        <Button
+                                            Tag="{Binding Id}"
+                                            IsVisible="{Binding IsAdmin}"
+                                            Content="удалить"
+                                            Click="DeleteServices_Click"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        
+        
+        <Border Grid.Column="2" Grid.Row="2">
+            <Button
+                HorizontalAlignment="Right"
+                Margin="0,10,10,0"
+                Name="AddServiceButton"
+                Content="Добавить"
+                DockPanel.Dock="Bottom"/>
+        </Border>
+    </Grid>
+</Window>
